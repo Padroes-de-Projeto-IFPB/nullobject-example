@@ -8,16 +8,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
 
+    UserRepository userRepository = new UserRepository();
+
     @Test
     public void findUserTest() {
-        UserRepository userRepository = new UserRepository();
         assertTrue(userRepository.find(1L).isPresent());
     }
 
     @Test
     public void findNonExistingUserTest() {
-        UserRepository userRepository = new UserRepository();
         assertNotNull(userRepository.find(5L).orElse(new User("admin", "321")));
+    }
+
+    @Test
+    public void getLoginFromUser() throws Exception {
+        String login = userRepository.find(1L).map(User::getLogin).orElseThrow( () -> new Exception("User not found") );
+        assertEquals(login, "admin");
     }
 
 }
