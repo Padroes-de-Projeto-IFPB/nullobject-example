@@ -12,6 +12,7 @@ public class UserRepository {
             user = new User();
             user.setLogin("admin");
             user.setPassword("123");
+            user.setActive(false);
         }
 
         return Optional.ofNullable(user);

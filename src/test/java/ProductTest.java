@@ -33,11 +33,15 @@ public class ProductTest {
     public void findProduct() {
         Product existingProduct = repository.find(product.getId());
         assertNotNull(existingProduct);
+        assertEquals(existingProduct.getTitle(), "Hamburguer");
+        assertEquals(existingProduct.getPrice(), BigDecimal.valueOf(2300L));
+        assertEquals(existingProduct.getDesc(), "desc");
+        assertEquals(existingProduct.getProductType(), Product.ProductType.FOOD);
     }
 
     @Test
     public void findNullObjectProduct() {
-        Product nullProduct = repository.find(10L);
+        Product nullProduct = repository.find(15L);
         assertEquals(nullProduct.getTitle(), "empty");
         assertEquals(nullProduct.getPrice(), BigDecimal.valueOf(0L));
         assertEquals(nullProduct.getDesc(), "Lorem Ipsum");
